@@ -7,6 +7,9 @@ import static in.co.rajkumaar.notifyabroad.Utils.hasPermissions;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +26,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView permissionsNotGranted = findViewById(R.id.permissions_not_granted);
+        LinearLayout settingsLayout = findViewById(R.id.settings_layout);
+
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {RECEIVE_SMS, READ_PHONE_STATE, READ_CALL_LOG};
         if (!hasPermissions(this, PERMISSIONS)) {
+            permissionsNotGranted.setVisibility(View.VISIBLE);
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        } else {
+            permissionsNotGranted.setVisibility(View.GONE);
+            settingsLayout.setVisibility(View.VISIBLE);
         }
     }
 
