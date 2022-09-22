@@ -66,7 +66,7 @@ public class CallReceiver extends BroadcastReceiver {
             JSONObject requestBody = new JSONObject();
 
             requestBody.put("text",
-                    "<b>Call Alert</b> : \n\n"
+                    "<b>Call Alert</b>\n\n"
                             + number + " - " + state
                             + "\n\nWhatsApp Link : https://api.whatsapp.com/send/?phone="
                             + (number.startsWith("+") ? number.substring(1) : number)

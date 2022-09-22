@@ -10,7 +10,9 @@ import static in.co.rajkumaar.notifyabroad.Constants.TELEGRAM_BOT_TOKEN;
 import static in.co.rajkumaar.notifyabroad.Constants.TELEGRAM_CHAT_ID;
 import static in.co.rajkumaar.notifyabroad.Utils.hasPermissions;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -58,41 +60,64 @@ public class MainActivity extends AppCompatActivity {
 
         String[] PERMISSIONS = {RECEIVE_SMS, READ_PHONE_STATE, READ_CALL_LOG};
         if (!hasPermissions(this, PERMISSIONS)) {
+            settingsLayout.setVisibility(View.GONE);
+            permissionsNotGranted.setVisibility(View.VISIBLE);
             ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
         } else {
             initSettingsLayout();
         }
 
         saveSettings.setOnClickListener(view -> {
-            String enteredBotToken = botToken.getText().toString();
-            TelegramAPI api = new TelegramAPI(MainActivity.this, enteredBotToken);
-            ProgressDialog dialog =
-                    ProgressDialog.show(
-                            MainActivity.this,
-                            "",
-                            "Validating your token...",
-                            true
-                    );
-            api.getMe(new TelegramAPIResponse() {
-                @Override
-                public void onSuccess(JSONObject response) {
-                    dialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Token validated successfully", Toast.LENGTH_SHORT).show();
-                    sharedPreferencesEditor.putString(TELEGRAM_BOT_TOKEN, enteredBotToken);
-                    sharedPreferencesEditor.putString(TELEGRAM_CHAT_ID, chatID.getText().toString());
-                    sharedPreferencesEditor.putBoolean(NOTIFY_CALLS, notifyCalls.isChecked());
-                    sharedPreferencesEditor.putBoolean(NOTIFY_SMS, notifySMS.isChecked());
-                    sharedPreferencesEditor.apply();
-                    Log.v("MainActivity", response.toString());
+            try {
+                String enteredBotToken = botToken.getText().toString();
+                String enteredChatID = chatID.getText().toString();
+                if (enteredBotToken.isEmpty() || enteredChatID.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Please fill in both the inputs", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                TelegramAPI api = new TelegramAPI(MainActivity.this, enteredBotToken);
+                ProgressDialog dialog =
+                        ProgressDialog.show(
+                                MainActivity.this,
+                                "",
+                                "Validating your token and ID...",
+                                true
+                        );
+                JSONObject requestBody = new JSONObject();
+                requestBody.put("text", "Hope you have fun abroad!");
+                requestBody.put("chat_id", enteredChatID);
+                api.sendMessage(requestBody, new TelegramAPIResponse() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        dialog.dismiss();
+                        Toast.makeText(MainActivity.this, "Verified successfully. You are good to go.", Toast.LENGTH_SHORT).show();
+                        sharedPreferencesEditor.putString(TELEGRAM_BOT_TOKEN, enteredBotToken);
+                        sharedPreferencesEditor.putString(TELEGRAM_CHAT_ID, enteredChatID);
+                        sharedPreferencesEditor.putBoolean(NOTIFY_CALLS, notifyCalls.isChecked());
+                        sharedPreferencesEditor.putBoolean(NOTIFY_SMS, notifySMS.isChecked());
+                        sharedPreferencesEditor.apply();
 
-                @Override
-                public void onFailure(Exception exception) {
-                    dialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Token seems invalid", Toast.LENGTH_SHORT).show();
-                    exception.printStackTrace();
-                }
-            });
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setMessage("Verify if you have received a test message from your bot in your Telegram chat.")
+                                .setPositiveButton("Okay", (dialogInterface, i) -> dialogInterface.dismiss())
+                                .show();
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+                        dialog.dismiss();
+                        exception.printStackTrace();
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("Verification failed")
+                                .setMessage("Enter valid token & ID and ensure you have started the bot from your chat.")
+                                .setPositiveButton("Okay", (dialogInterface, i) -> dialogInterface.dismiss())
+                                .show();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(MainActivity.this, "Unexpected error occurred", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
