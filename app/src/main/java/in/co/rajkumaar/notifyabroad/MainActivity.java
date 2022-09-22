@@ -8,7 +8,6 @@ import static in.co.rajkumaar.notifyabroad.Utils.hasPermissions;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,12 +19,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import java.util.Arrays;
-
 public class MainActivity extends AppCompatActivity {
+
+    private SharedPreferences sharedPreferences;
 
     private TextView permissionsNotGranted;
     private LinearLayout settingsLayout;
+    private EditText botURL;
+    private CheckBox notifyCalls;
+    private CheckBox notifySMS;
+
+    private final String TELEGRAM_BOT_URL = "telegram_bot_url";
+    private final String NOTIFY_CALLS = "notify_calls";
+    private final String NOTIFY_SMS = "notify_sms";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,27 +41,19 @@ public class MainActivity extends AppCompatActivity {
         permissionsNotGranted = findViewById(R.id.permissions_not_granted);
         settingsLayout = findViewById(R.id.settings_layout);
         Button saveSettings = findViewById(R.id.saveSettings);
-        EditText botURL = findViewById(R.id.telegramURL);
-        CheckBox notifyCalls = findViewById(R.id.notifyCalls);
-        CheckBox notifySMS = findViewById(R.id.notifySMS);
+        botURL = findViewById(R.id.telegramURL);
+        notifyCalls = findViewById(R.id.notifyCalls);
+        notifySMS = findViewById(R.id.notifySMS);
 
         String prefName = "settings";
-        SharedPreferences sharedPreferences = getSharedPreferences(prefName, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(prefName, MODE_PRIVATE);
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
-
-        String TELEGRAM_BOT_URL = "telegram_bot_url";
-        String NOTIFY_CALLS = "notify_calls";
-        String NOTIFY_SMS = "notify_sms";
 
         String[] PERMISSIONS = {RECEIVE_SMS, READ_PHONE_STATE, READ_CALL_LOG};
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
         } else {
-            permissionsNotGranted.setVisibility(View.GONE);
-            settingsLayout.setVisibility(View.VISIBLE);
-            botURL.setText(sharedPreferences.getString(TELEGRAM_BOT_URL, ""));
-            notifyCalls.setChecked(sharedPreferences.getBoolean(NOTIFY_CALLS, false));
-            notifySMS.setChecked(sharedPreferences.getBoolean(NOTIFY_SMS, false));
+            initSettingsLayout();
         }
 
         saveSettings.setOnClickListener(view -> {
@@ -65,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferencesEditor.putBoolean(NOTIFY_SMS, notifySMS.isChecked());
             sharedPreferencesEditor.apply();
         });
+    }
+
+    private void initSettingsLayout() {
+        permissionsNotGranted.setVisibility(View.GONE);
+        settingsLayout.setVisibility(View.VISIBLE);
+        botURL.setText(sharedPreferences.getString(TELEGRAM_BOT_URL, ""));
+        notifyCalls.setChecked(sharedPreferences.getBoolean(NOTIFY_CALLS, false));
+        notifySMS.setChecked(sharedPreferences.getBoolean(NOTIFY_SMS, false));
     }
 
     @Override
@@ -78,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (allPermissionsGranted) {
-            permissionsNotGranted.setVisibility(View.GONE);
-            settingsLayout.setVisibility(View.VISIBLE);
+            initSettingsLayout();
         }
     }
 }
