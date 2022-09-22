@@ -27,10 +27,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Telegram bot URL"
+                android:text="Telegram bot token"
                 android:textColor="@color/black" />
             <EditText
-                android:id="@+id/telegramURL"
+                android:id="@+id/telegramToken"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
