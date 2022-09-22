@@ -7,6 +7,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONObject;
+
 public class TelegramAPI {
     private final String botURL;
     private final RequestQueue requestQueue;
@@ -23,6 +25,18 @@ public class TelegramAPI {
                         Request.Method.GET,
                         botURL + "/getMe",
                         null,
+                        apiResponse::onSuccess,
+                        apiResponse::onFailure
+                );
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void sendMessage(JSONObject requestBody, TelegramAPIResponse apiResponse) {
+        JsonObjectRequest jsonObjectRequest =
+                new JsonObjectRequest(
+                        Request.Method.POST,
+                        botURL + "/sendMessage",
+                        requestBody,
                         apiResponse::onSuccess,
                         apiResponse::onFailure
                 );

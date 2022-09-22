@@ -40,6 +40,21 @@
             </EditText>
             <TextView
                 android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:text="Telegram Chat ID"
+                android:textColor="@color/black" />
+            <EditText
+                android:id="@+id/telegramChatID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:importantForAutofill="no">
+            </EditText>
+            <TextView
+                android:textStyle="bold"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

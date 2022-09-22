@@ -3,6 +3,11 @@ package in.co.rajkumaar.notifyabroad;
 import static android.Manifest.permission.READ_CALL_LOG;
 import static android.Manifest.permission.READ_PHONE_STATE;
 import static android.Manifest.permission.RECEIVE_SMS;
+import static in.co.rajkumaar.notifyabroad.Constants.NOTIFY_CALLS;
+import static in.co.rajkumaar.notifyabroad.Constants.NOTIFY_SMS;
+import static in.co.rajkumaar.notifyabroad.Constants.SHARED_PREFERENCES_KEY;
+import static in.co.rajkumaar.notifyabroad.Constants.TELEGRAM_BOT_TOKEN;
+import static in.co.rajkumaar.notifyabroad.Constants.TELEGRAM_CHAT_ID;
 import static in.co.rajkumaar.notifyabroad.Utils.hasPermissions;
 
 import android.app.ProgressDialog;
@@ -31,12 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView permissionsNotGranted;
     private LinearLayout settingsLayout;
     private EditText botToken;
+    private EditText chatID;
     private CheckBox notifyCalls;
     private CheckBox notifySMS;
-
-    private final String TELEGRAM_BOT_TOKEN = "telegram_bot_token";
-    private final String NOTIFY_CALLS = "notify_calls";
-    private final String NOTIFY_SMS = "notify_sms";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
         settingsLayout = findViewById(R.id.settings_layout);
         Button saveSettings = findViewById(R.id.saveSettings);
         botToken = findViewById(R.id.telegramToken);
+        chatID = findViewById(R.id.telegramChatID);
         notifyCalls = findViewById(R.id.notifyCalls);
         notifySMS = findViewById(R.id.notifySMS);
 
-        String prefName = "settings";
-        sharedPreferences = getSharedPreferences(prefName, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_KEY, MODE_PRIVATE);
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
 
         String[] PERMISSIONS = {RECEIVE_SMS, READ_PHONE_STATE, READ_CALL_LOG};
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     dialog.dismiss();
                     Toast.makeText(MainActivity.this, "Token validated successfully", Toast.LENGTH_SHORT).show();
                     sharedPreferencesEditor.putString(TELEGRAM_BOT_TOKEN, enteredBotToken);
+                    sharedPreferencesEditor.putString(TELEGRAM_CHAT_ID, chatID.getText().toString());
                     sharedPreferencesEditor.putBoolean(NOTIFY_CALLS, notifyCalls.isChecked());
                     sharedPreferencesEditor.putBoolean(NOTIFY_SMS, notifySMS.isChecked());
                     sharedPreferencesEditor.apply();
@@ -97,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         permissionsNotGranted.setVisibility(View.GONE);
         settingsLayout.setVisibility(View.VISIBLE);
         botToken.setText(sharedPreferences.getString(TELEGRAM_BOT_TOKEN, ""));
+        chatID.setText(sharedPreferences.getString(TELEGRAM_CHAT_ID, ""));
         notifyCalls.setChecked(sharedPreferences.getBoolean(NOTIFY_CALLS, false));
         notifySMS.setChecked(sharedPreferences.getBoolean(NOTIFY_SMS, false));
     }
