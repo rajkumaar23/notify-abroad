@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(JSONObject response) {
                         dialog.dismiss();
-                        Toast.makeText(MainActivity.this, "Verified successfully. You are good to go.", Toast.LENGTH_SHORT).show();
                         sharedPreferencesEditor.putString(TELEGRAM_BOT_TOKEN, enteredBotToken);
                         sharedPreferencesEditor.putString(TELEGRAM_CHAT_ID, enteredChatID);
                         sharedPreferencesEditor.putBoolean(NOTIFY_CALLS, notifyCalls.isChecked());
