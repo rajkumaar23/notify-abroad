@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:text="Necessary permissions have not been granted"
             android:id="@+id/permissions_not_granted"
-            android:textColor="@color/black"
             android:visibility="gone"
             android:textSize="16sp"
             android:layout_height="wrap_content"/>
@@ -31,8 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Telegram bot token"
-                android:textColor="@color/black" />
+                android:text="Telegram bot token" />
             <EditText
                 android:id="@+id/telegramToken"
                 android:layout_width="match_parent"
@@ -46,8 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Telegram Chat ID"
-                android:textColor="@color/black" />
+                android:text="Telegram Chat ID" />
             <EditText
                 android:id="@+id/telegramChatID"
                 android:layout_width="match_parent"
@@ -61,8 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Categories of notifications"
-                android:textColor="@color/black" />
+                android:text="Categories of notifications" />
             <CheckBox
                 android:id="@+id/notifyCalls"
                 android:layout_width="wrap_content"
