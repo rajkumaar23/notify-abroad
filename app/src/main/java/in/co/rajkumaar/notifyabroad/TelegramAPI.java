@@ -19,18 +19,6 @@ public class TelegramAPI {
         this.requestQueue = Volley.newRequestQueue(context);
     }
 
-    public void getMe(TelegramAPIResponse apiResponse) {
-        JsonObjectRequest jsonObjectRequest =
-                new JsonObjectRequest(
-                        Request.Method.GET,
-                        botURL + "/getMe",
-                        null,
-                        apiResponse::onSuccess,
-                        apiResponse::onFailure
-                );
-        requestQueue.add(jsonObjectRequest);
-    }
-
     public void sendMessage(JSONObject requestBody, TelegramAPIResponse apiResponse) {
         JsonObjectRequest jsonObjectRequest =
                 new JsonObjectRequest(
