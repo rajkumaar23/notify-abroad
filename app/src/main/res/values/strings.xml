@@ -7,4 +7,6 @@
     <string name="notify_calls">Notify calls</string>
     <string name="notify_sms">Notify SMS</string>
     <string name="save_settings">Save settings</string>
+    <string name="how_to_use">How to use?</string>
+    <string name="how_to_use_link">https://github.com/rajkumaar23/notify-abroad/blob/main/README.md#how-to-use</string>
 </resources>
