@@ -13,7 +13,7 @@
         <TextView
             android:textAlignment="center"
             android:layout_width="match_parent"
-            android:text="Necessary permissions have not been granted"
+            android:text="@string/permissions_not_granted"
             android:id="@+id/permissions_not_granted"
             android:visibility="gone"
             android:textSize="16sp"
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Telegram bot token" />
+                android:text="@string/telegram_bot_token" />
             <EditText
                 android:id="@+id/telegramToken"
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Telegram Chat ID" />
+                android:text="@string/telegram_chat_id" />
             <EditText
                 android:id="@+id/telegramChatID"
                 android:layout_width="match_parent"
@@ -58,17 +58,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Categories of notifications" />
+                android:text="@string/categories_of_notifications" />
             <CheckBox
                 android:id="@+id/notifyCalls"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notify calls" />
+                android:text="@string/notify_calls" />
             <CheckBox
                 android:id="@+id/notifySMS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notify SMS"/>
+                android:text="@string/notify_sms"/>
             <Button
                 android:id="@+id/saveSettings"
                 android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Save settings"/>
+                android:text="@string/save_settings"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

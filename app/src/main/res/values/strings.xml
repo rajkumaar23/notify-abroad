@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Notify Abroad</string>
+    <string name="permissions_not_granted">Necessary permissions have not been granted</string>
+    <string name="telegram_bot_token">Telegram bot token</string>
+    <string name="telegram_chat_id">Telegram Chat ID</string>
+    <string name="categories_of_notifications">Categories of notifications</string>
+    <string name="notify_calls">Notify calls</string>
+    <string name="notify_sms">Notify SMS</string>
+    <string name="save_settings">Save settings</string>
 </resources>
