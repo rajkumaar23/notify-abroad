@@ -13,8 +13,10 @@ import static in.co.rajkumaar.notifyabroad.Utils.hasPermissions;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         permissionsNotGranted = findViewById(R.id.permissions_not_granted);
         settingsLayout = findViewById(R.id.settings_layout);
         Button saveSettings = findViewById(R.id.saveSettings);
+        Button howToUse = findViewById(R.id.howToUse);
         botToken = findViewById(R.id.telegramToken);
         chatID = findViewById(R.id.telegramChatID);
         notifyCalls = findViewById(R.id.notifyCalls);
@@ -117,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 Toast.makeText(MainActivity.this, "Unexpected error occurred", Toast.LENGTH_SHORT).show();
             }
+        });
+        howToUse.setOnClickListener(view -> {
+            String url = getString(R.string.how_to_use_link);
+            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
         });
     }
 

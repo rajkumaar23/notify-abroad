@@ -31,12 +31,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:text="@string/telegram_bot_token" />
+
             <EditText
                 android:id="@+id/telegramToken"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAutofill="no"
                 android:inputType="textUri"
-                android:importantForAutofill="no">
+                android:minHeight="48dp">
+
                 <requestFocus />
             </EditText>
             <TextView
@@ -45,13 +48,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:text="@string/telegram_chat_id" />
+
             <EditText
                 android:id="@+id/telegramChatID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAutofill="no"
                 android:inputType="number"
-                android:importantForAutofill="no">
-            </EditText>
+                android:minHeight="48dp"></EditText>
             <TextView
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
@@ -79,6 +83,16 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/save_settings"/>
+            <Button
+                android:id="@+id/howToUse"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/how_to_use"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
