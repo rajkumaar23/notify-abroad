@@ -14,4 +14,4 @@ a simple app that lets you forward your text messages and/or call logs to your t
 - Ensure that the device, this app is installed on, is charged and connected to the internet all the time.
 
 ## But why ?
-When I was flying to the US for my masters, it was an unavoidable need to have access to the OTPs or calls that come to my Indian number, which, by the way, I left at home. Since it was **not** feasible to contact a human in India, who can relay the OTPs, everytime it is received by the Indian number, I built this app to forward 'em automatically to my telegram chat.
+When I came to the US for my master's, it was an unavoidable need to have access to the OTPs or calls that come to my Indian number, which, by the way, I left at home. Since it was **not** feasible to contact a human in India, who can relay the OTPs, everytime it is received by the Indian number, I built this app to forward 'em automatically to my telegram chat.
