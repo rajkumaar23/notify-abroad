@@ -58,8 +58,13 @@ public class MainActivity extends AppCompatActivity {
         notifyCalls = findViewById(R.id.notifyCalls);
         notifySMS = findViewById(R.id.notifySMS);
         TextView version = findViewById(R.id.version);
+        TextView about = findViewById(R.id.about);
 
         version.setText(String.format("v%s", BuildConfig.VERSION_NAME));
+        about.setOnClickListener(view -> {
+            String url = getString(R.string.online_home_of_rajkumar);
+            startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
+        });
 
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_KEY, MODE_PRIVATE);
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
