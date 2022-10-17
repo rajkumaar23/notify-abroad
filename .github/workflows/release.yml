@@ -18,8 +18,7 @@ jobs:
       - name: Assemble release APK
         run: |
           echo "$KEYS_PROPERTIES" >> app/keys.properties
-          echo "$KEY_JKS" >> key.jks.enc
-          openssl base64 -d -in key.jks.enc -out key.jks
+          gpg --quiet --batch --yes --decrypt --passphrase="$KEY_JKS" --output key.jks key.jks.gpg
           bash ./gradlew assembleRelease
           bash ./gradlew bundleRelease
         env:
