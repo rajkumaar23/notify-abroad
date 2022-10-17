@@ -14,7 +14,7 @@ try {
 }
 
 android {
-    compileSdk 32
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "in.co.rajkumaar.notifyabroad"
@@ -41,6 +41,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
