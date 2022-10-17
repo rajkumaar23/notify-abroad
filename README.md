@@ -4,6 +4,7 @@ a simple app that lets you forward your text messages and/or call logs to your t
 
 ## How to use?
 
+- I am assuming you already have a Telegram account by now. If not, create one before proceeding to the next step.
 - Create a Telegram bot with the help of [Botfather](https://t.me/botfather).
 - Note down the token associated with the bot.
 - And press the **START** button in the bot's chat.
