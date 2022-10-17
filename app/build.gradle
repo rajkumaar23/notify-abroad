@@ -2,6 +2,17 @@ plugins {
     id 'com.android.application'
 }
 
+def props = new Properties()
+try {
+    props.load(new FileInputStream("app/keys.properties"))
+    println("===========")
+    println("Loaded app/keys.properties")
+    println("===========")
+    println()
+} catch (e) {
+    throw e
+}
+
 android {
     compileSdk 32
 
@@ -13,6 +24,17 @@ android {
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../key.jks")
+            storePassword = "${props.getProperty("storePassword")}"
+            keyAlias = "key0"
+            keyPassword = "${props.getProperty("keyPassword")}"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
     }
 
     buildTypes {
