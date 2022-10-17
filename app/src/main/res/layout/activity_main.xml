@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:minHeight="48dp"></EditText>
+                android:minHeight="48dp" />
             <TextView
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
@@ -93,6 +93,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@string/how_to_use"/>
+            <TextView
+                android:id="@+id/version"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

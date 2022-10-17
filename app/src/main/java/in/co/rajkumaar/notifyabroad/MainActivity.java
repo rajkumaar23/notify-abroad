@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         chatID = findViewById(R.id.telegramChatID);
         notifyCalls = findViewById(R.id.notifyCalls);
         notifySMS = findViewById(R.id.notifySMS);
+        TextView version = findViewById(R.id.version);
+
+        version.setText(String.format("v%s", BuildConfig.VERSION_NAME));
 
         sharedPreferences = getSharedPreferences(SHARED_PREFERENCES_KEY, MODE_PRIVATE);
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
