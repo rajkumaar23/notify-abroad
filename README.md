@@ -1,6 +1,8 @@
-# Notify Abroad
-
-a simple app that lets you forward your text messages and/or call logs to your telegram chat.
+<div align="center">
+  <p><img src="assets/banner.png?raw=true"/></p>
+  <h1>Notify Abroad</h1>
+  <p>a simple app that lets you forward your text messages and/or call logs to your telegram chat.</p>
+</div>
 
 ## How to use?
 
