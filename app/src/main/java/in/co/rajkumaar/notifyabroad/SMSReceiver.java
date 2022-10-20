@@ -17,6 +17,9 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.co.rajkumaar.notifyabroad.api.TelegramAPI;
+import in.co.rajkumaar.notifyabroad.api.TelegramAPIResponse;
+
 public class SMSReceiver extends BroadcastReceiver {
     private final String TAG = "SMSReceiver";
 

@@ -1,4 +1,4 @@
-package in.co.rajkumaar.notifyabroad;
+package in.co.rajkumaar.notifyabroad.api;
 
 import android.content.Context;
 
