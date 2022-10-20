@@ -1,6 +1,9 @@
-name: Build
+name: Tagged Release
 
-on: [workflow_dispatch]
+on:
+  push:
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -20,7 +23,6 @@ jobs:
           echo "$KEYS_PROPERTIES" >> app/keys.properties
           gpg --quiet --batch --yes --decrypt --passphrase="$KEY_JKS" --output key.jks key.jks.gpg
           bash ./gradlew assembleRelease
-          bash ./gradlew bundleRelease
         env:
           KEYS_PROPERTIES: '${{ secrets.KEYS_PROPERTIES }}'
           KEY_JKS: '${{ secrets.KEY_JKS }}'
@@ -29,11 +31,6 @@ jobs:
         with:
           name: app-release
           path: app/build/outputs/apk/release/app-release.apk
-      - name: Upload Bundle
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-bundle
-          path: app/build/outputs/bundle/release/app-release.aab
 
   github-release:
     name: GitHub release
@@ -49,44 +46,6 @@ jobs:
         name: Uploading to GitHub
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: latest
           prerelease: false
           files: |
             app-release/app-release.apk
-
-  playstore-release:
-    name: PlayStore Release
-    needs: github-release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2.3.1
-
-      - name: Setup Java JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: 11.0.7
-          java-package: jdk
-          distribution: 'zulu'
-
-      - name: Retrieve serviceAccountJson
-        run: |
-          echo "$SERVICE_ACCOUNT_JSON" >> api-service-account.json
-        env:
-          SERVICE_ACCOUNT_JSON: '${{ secrets.SERVICE_ACCOUNT_JSON }}'
-
-      - name: Download bundle
-        uses: actions/download-artifact@v2
-        with:
-          name: app-bundle
-          path: app-bundle
-
-      - uses: r0adkll/upload-google-play@v1
-        name: Upload to PlayStore
-        with:
-          serviceAccountJson: api-service-account.json
-          packageName: in.co.rajkumaar.notifyabroad
-          releaseFiles: app-bundle/app-release.aab
-          track: production
-          status: completed
-          whatsNewDirectory: distribution/
