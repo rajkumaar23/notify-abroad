@@ -29,7 +29,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: app-release
+          name: notify-abroad
           path: app/build/outputs/apk/release/app-release.apk
 
   github-release:
@@ -40,7 +40,7 @@ jobs:
       - name: Download APK
         uses: actions/download-artifact@v2
         with:
-          name: app-release
+          name: notify-abroad
           path: app-release
       - uses: marvinpinto/action-automatic-releases@latest
         name: Uploading to GitHub
@@ -48,4 +48,4 @@ jobs:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
           prerelease: false
           files: |
-            app-release/app-release.apk
+            app-release/notify-abroad.apk
