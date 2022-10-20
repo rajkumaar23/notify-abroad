@@ -12,7 +12,7 @@ public class GitHubAPI {
     private final RequestQueue requestQueue;
 
     public GitHubAPI(Context context, String repoOwnerUsername, String repoName) {
-        String GITHUB_BASE_URL = "https://api.github.com";
+        String GITHUB_BASE_URL = "https://api.github.com/repos";
         this.repoURL = String.format("%s/%s/%s", GITHUB_BASE_URL, repoOwnerUsername, repoName);
         this.requestQueue = Volley.newRequestQueue(context);
     }

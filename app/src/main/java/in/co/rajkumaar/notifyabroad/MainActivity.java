@@ -29,8 +29,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import in.co.rajkumaar.notifyabroad.api.GitHubAPI;
+import in.co.rajkumaar.notifyabroad.api.GitHubAPIResponse;
 import in.co.rajkumaar.notifyabroad.api.TelegramAPI;
 import in.co.rajkumaar.notifyabroad.api.TelegramAPIResponse;
 
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
         } else {
             initSettingsLayout();
+            checkForUpdates();
         }
 
         saveSettings.setOnClickListener(view -> {
@@ -133,6 +137,38 @@ public class MainActivity extends AppCompatActivity {
         howToUse.setOnClickListener(view -> {
             String url = getString(R.string.how_to_use_link);
             startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
+        });
+    }
+
+    private void checkForUpdates() {
+        String repoOwnerUsername = getString(R.string.repo_owner_username);
+        String repoName = getString(R.string.repo_name);
+        GitHubAPI api = new GitHubAPI(MainActivity.this, repoOwnerUsername, repoName);
+        String currentVersion = "v" + BuildConfig.VERSION_NAME;
+        api.getLatestReleaseVersion(new GitHubAPIResponse() {
+            @Override
+            public void onSuccess(JSONObject response) {
+                try {
+                    String latestVersion = response.getString("name");
+                    if (currentVersion.compareTo(latestVersion) < 0) {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("Update available")
+                                .setMessage("A newer version to the app is available for download.")
+                                .setPositiveButton("Update now", (dialogInterface, i) -> {
+                                    String url = "https://github.com/" + repoOwnerUsername + "/" + repoName + "/releases/" + latestVersion;
+                                    startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)));
+                                })
+                                .setNegativeButton("Later", (dialogInterface, i) -> dialogInterface.dismiss()).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                exception.printStackTrace();
+            }
         });
     }
 

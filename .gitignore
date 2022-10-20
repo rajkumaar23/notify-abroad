@@ -42,6 +42,8 @@ captures/
 .idea/dictionaries
 .idea/libraries
 .idea/caches
+.idea/modules.xml
+.idea/deploymentTargetDropDown.xml
 
 # Keystore files
 *.jks

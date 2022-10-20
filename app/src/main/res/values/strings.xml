@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Notify Abroad</string>
+    
+    <string name="repo_owner_username">rajkumaar23</string>
+    <string name="repo_name">notify-abroad</string>
+    
     <string name="permissions_not_granted">Necessary permissions have not been granted</string>
     <string name="telegram_bot_token">Telegram bot token</string>
     <string name="telegram_chat_id">Telegram Chat ID</string>
