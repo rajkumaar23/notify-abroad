@@ -1,4 +1,4 @@
-package in.co.rajkumaar.notifyabroad;
+package in.co.rajkumaar.notifyabroad.receivers;
 
 import static android.content.Context.MODE_PRIVATE;
 
