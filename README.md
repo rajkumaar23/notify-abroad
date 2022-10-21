@@ -16,7 +16,7 @@ You can find the latest version of APK under [Releases](https://github.com/rajku
   - Do not share this token with anyone.
 - Open your bot's chat and press the **START** button.
   - This is important! Otherwise, the bot can't send you any notification.
-- With the help of [Chat ID Echo Bot](https://t.me/chatid_echo_bot), note down your own Telegram user ID.
+- With the help of [Chat ID Echo Bot](https://t.me/chat_id_echo_bot), note down your own Telegram user ID.
 - Open the Notify Abroad app, enter both the token & your user ID and save the settings.
 - Hola! All your messages/calls will be forwarded to your Telegram chat.
 - Ensure that the device, this app is installed on, is charged and connected to the internet all the time.
