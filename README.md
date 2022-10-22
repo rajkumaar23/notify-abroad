@@ -19,6 +19,9 @@ You can find the latest version of APK under [Releases](https://github.com/rajku
 - With the help of [Chat ID Echo Bot](https://t.me/chat_id_echo_bot), note down your own Telegram user ID.
 - Open the Notify Abroad app, enter both the token & your user ID and save the settings.
 - Hola! All your messages/calls will be forwarded to your Telegram chat.
+- **Important** - Some devices prevent the app from running in background to optimize its battery. To override that, you can add Notify Abroad to the battery optimization exemptions.
+  - This can usually be done by changing the app's battery optimization setting to "Don't optimize" under Settings > Apps > All apps > Notify Abroad > Battery.
+  - Check [this link](https://www.popsci.com/diy/turn-off-battery-saver/) for more details.
 - Ensure that the device, this app is installed on, is charged and connected to the internet all the time.
 
 ## But why ?
