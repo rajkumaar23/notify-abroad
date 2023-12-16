@@ -16,4 +16,9 @@
     <string name="built_with">Built with ❤️ by Rajkumar</string>
     <string name="online_home_of_rajkumar">https://rajkumaar.co.in</string>
     <string name="sms_filters">SMS Filters</string>
+    <string name="add_new_filter">Add new filter</string>
+    <string name="enter_the_filter_text">Enter the filter text</string>
+    <string name="submit">Submit</string>
+    <string name="enable_filters">Enable filters</string>
+    <string name="add_filter">Add Filter</string>
 </resources>
