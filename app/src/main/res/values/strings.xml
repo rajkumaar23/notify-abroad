@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Notify Abroad</string>
-    
+
     <string name="repo_owner_username">rajkumaar23</string>
     <string name="repo_name">notify-abroad</string>
-    
+
     <string name="permissions_not_granted">Necessary permissions have not been granted</string>
     <string name="telegram_bot_token">Telegram bot token</string>
     <string name="telegram_chat_id">Telegram Chat ID</string>
@@ -15,4 +15,5 @@
     <string name="how_to_use_link">https://github.com/rajkumaar23/notify-abroad/blob/main/README.md#how-to-use</string>
     <string name="built_with">Built with ❤️ by Rajkumar</string>
     <string name="online_home_of_rajkumar">https://rajkumaar.co.in</string>
+    <string name="sms_filters">SMS Filters</string>
 </resources>

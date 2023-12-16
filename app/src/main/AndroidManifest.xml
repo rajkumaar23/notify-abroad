@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotifyAbroad"
         tools:targetApi="31">
+
         <receiver
             android:name=".receivers.SMSReceiver"
             android:enabled="true"
@@ -37,14 +38,19 @@
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FiltersActivity"
+            android:label="SMS Filters"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
