@@ -1,7 +1,6 @@
 package in.co.rajkumaar.notifyabroad.receivers;
 
 import static android.content.Context.MODE_PRIVATE;
-
 import static in.co.rajkumaar.notifyabroad.Constants.NOTIFY_CALLS;
 import static in.co.rajkumaar.notifyabroad.Constants.SHARED_PREFERENCES_KEY;
 import static in.co.rajkumaar.notifyabroad.Constants.TELEGRAM_BOT_TOKEN;
@@ -28,20 +27,17 @@ public class CallReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
-            if (intent.getAction().equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
+            String action = intent.getAction();
+            if (action != null && action.equals(TelephonyManager.ACTION_PHONE_STATE_CHANGED)) {
                 String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
                 String incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
 
-                if (
-                        currentState.equals(TelephonyManager.EXTRA_STATE_IDLE)
-                                && state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)
-                ) {
+                if (currentState.equals(TelephonyManager.EXTRA_STATE_IDLE) && state != null && state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK)) {
                     return;
                 }
 
-                boolean shouldIgnoreState =
-                        !state.equals(TelephonyManager.EXTRA_STATE_RINGING)
-                                && !state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK);
+                boolean shouldIgnoreState = (state == null)
+                        || (!state.equals(TelephonyManager.EXTRA_STATE_RINGING) && !state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK));
 
                 if (incomingNumber == null || incomingNumber.isEmpty() || shouldIgnoreState) {
                     return;
@@ -80,7 +76,7 @@ public class CallReceiver extends BroadcastReceiver {
             api.sendMessage(requestBody, new TelegramAPIResponse() {
                 @Override
                 public void onSuccess(JSONObject response) {
-                    Log.v(TAG, response.toString());
+                    Log.i(TAG, String.format("Call log relayed successfully : %s", response.toString()));
                 }
 
                 @Override

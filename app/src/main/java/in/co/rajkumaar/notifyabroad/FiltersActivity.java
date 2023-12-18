@@ -67,7 +67,12 @@ public class FiltersActivity extends AppCompatActivity {
         boolean areFiltersEnabled = sharedPreferences.getBoolean(ARE_FILTERS_ENABLED, false);
         checkBoxEnableFilters.setChecked(areFiltersEnabled);
         toggleFiltersListVisibility(areFiltersEnabled);
-        checkBoxEnableFilters.setOnCheckedChangeListener((buttonView, isChecked) -> toggleFiltersListVisibility(isChecked));
+        checkBoxEnableFilters.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            toggleFiltersListVisibility(isChecked);
+            sharedPreferencesEditor.putBoolean(ARE_FILTERS_ENABLED, isChecked);
+            sharedPreferencesEditor.commit();
+            Toast.makeText(FiltersActivity.this, String.format("Filters are %s now!", isChecked ? "enabled" : "disabled"), Toast.LENGTH_SHORT).show();
+        });
 
         btnAddFilter.setOnClickListener(v -> {
             if (checkBoxEnableFilters.isChecked()) {
@@ -84,6 +89,10 @@ public class FiltersActivity extends AppCompatActivity {
             builder.setPositiveButton("Yes", (dialogInterface, i) -> {
                 filtersList.remove(position);
                 filtersAdapter.notifyDataSetChanged();
+                JSONArray filtersToStore = new JSONArray(filtersList);
+                sharedPreferencesEditor.putString(FILTERS_LIST, filtersToStore.toString());
+                sharedPreferencesEditor.commit();
+                Toast.makeText(FiltersActivity.this, "Filter deleted successfully!", Toast.LENGTH_SHORT).show();
             });
             builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel());
             builder.show();
@@ -91,9 +100,7 @@ public class FiltersActivity extends AppCompatActivity {
     }
 
     private void toggleFiltersListVisibility(boolean isChecked) {
-        sharedPreferencesEditor.putBoolean(ARE_FILTERS_ENABLED, isChecked);
         listViewFilters.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-        sharedPreferencesEditor.commit();
     }
 
     private void addNewFilter() {
@@ -105,18 +112,19 @@ public class FiltersActivity extends AppCompatActivity {
         bt.setOnClickListener(view -> {
             String newFilterText = filterText.getText().toString().trim();
             if (newFilterText.isEmpty()) {
-                Toast.makeText(FiltersActivity.this, "Filter text cannot be empty", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FiltersActivity.this, "Filter text cannot be empty!", Toast.LENGTH_SHORT).show();
             } else if (filtersList.contains(newFilterText)) {
-                Toast.makeText(FiltersActivity.this, "Filter already exists", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FiltersActivity.this, "Filter already exists!", Toast.LENGTH_SHORT).show();
             } else if (newFilterText.length() > SMS_CHAR_LIMIT) {
-                Toast.makeText(FiltersActivity.this, "Filter cannot be more than 160 characters", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FiltersActivity.this, "Filter cannot have more than 160 characters!", Toast.LENGTH_SHORT).show();
             } else {
-                filtersList.add(newFilterText.trim());
+                filtersList.add(0, newFilterText.trim());
                 filtersAdapter.notifyDataSetChanged();
                 dialog.cancel();
                 JSONArray filtersToStore = new JSONArray(filtersList);
                 sharedPreferencesEditor.putString(FILTERS_LIST, filtersToStore.toString());
                 sharedPreferencesEditor.commit();
+                Toast.makeText(FiltersActivity.this, "Filter added successfully!", Toast.LENGTH_SHORT).show();
             }
         });
         dialog.show();

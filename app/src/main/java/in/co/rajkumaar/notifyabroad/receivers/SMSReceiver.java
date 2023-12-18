@@ -1,6 +1,7 @@
 package in.co.rajkumaar.notifyabroad.receivers;
 
 import static android.content.Context.MODE_PRIVATE;
+import static in.co.rajkumaar.notifyabroad.Constants.ARE_FILTERS_ENABLED;
 import static in.co.rajkumaar.notifyabroad.Constants.FILTERS_LIST;
 import static in.co.rajkumaar.notifyabroad.Constants.NOTIFY_SMS;
 import static in.co.rajkumaar.notifyabroad.Constants.SHARED_PREFERENCES_KEY;
@@ -49,22 +50,24 @@ public class SMSReceiver extends BroadcastReceiver {
 
                     boolean skipMessage = false;
                     SharedPreferences prefs = context.getSharedPreferences(SMS_FILTERS, MODE_PRIVATE);
-                    String filterListString = prefs.getString(FILTERS_LIST, "");
-                    if (!filterListString.isEmpty()) {
-                        String messageLowerCase = message.toLowerCase();
-                        try {
-                            JSONArray filtersList = new JSONArray(filterListString);
-                            for (int i = 0; i < filtersList.length(); i++) {
-                                String filter = filtersList.getString(i);
-                                if (messageLowerCase.contains(filter)) {
-                                    Log.i("SMS RECEIVER", String.format("Message (%s) skipped because of filter : %s", message, filter));
-                                    skipMessage = true;
-                                    break;
+                    if (prefs.getBoolean(ARE_FILTERS_ENABLED, false)) {
+                        String filterListString = prefs.getString(FILTERS_LIST, "");
+                        if (!filterListString.isEmpty()) {
+                            String messageLowerCase = message.toLowerCase();
+                            try {
+                                JSONArray filtersList = new JSONArray(filterListString);
+                                for (int i = 0; i < filtersList.length(); i++) {
+                                    String filter = filtersList.getString(i);
+                                    if (messageLowerCase.contains(filter)) {
+                                        Log.i(TAG, String.format("SMS relaying skipped because a filter ('%s') is present : '%s'", filter, message));
+                                        skipMessage = true;
+                                        break;
+                                    }
                                 }
+                            } catch (JSONException e) {
+                                Log.e(TAG, String.format("filtersList parsing failed %s", e));
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            Log.e("SMS RECEIVER", String.format("filtersList parsing failed %s", e));
-                            e.printStackTrace();
                         }
                     }
 
@@ -93,7 +96,7 @@ public class SMSReceiver extends BroadcastReceiver {
             api.sendMessage(requestBody, new TelegramAPIResponse() {
                 @Override
                 public void onSuccess(JSONObject response) {
-                    Log.v(TAG, response.toString());
+                    Log.i(TAG, String.format("SMS relayed successfully : %s", response.toString()));
                 }
 
                 @Override
