@@ -7,28 +7,28 @@
         android:id="@+id/checkBoxEnableFilters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/enable_filters"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:checked="false"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp" />
-
-    <ListView
-        android:id="@+id/listViewFilters"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/checkBoxEnableFilters"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
+        android:text="@string/enable_filters" />
 
     <Button
         android:id="@+id/btnAddFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_filter"
-        android:layout_below="@id/listViewFilters"
+        android:layout_below="@id/checkBoxEnableFilters"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"/>
+        android:text="@string/add_filter" />
+
+    <ListView
+        android:id="@+id/listViewFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAddFilter"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
 </RelativeLayout>

@@ -6,4 +6,9 @@ public class Constants {
     public final static String TELEGRAM_CHAT_ID = "telegram_chat_id";
     public final static String NOTIFY_CALLS = "notify_calls";
     public final static String NOTIFY_SMS = "notify_sms";
+
+    // SMS Filters - Storage
+    public final static String SMS_FILTERS = "sms_filters";
+    public final static String ARE_FILTERS_ENABLED = "are_filters_enabled";
+    public final static String FILTERS_LIST = "filters_list";
 }

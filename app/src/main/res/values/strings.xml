@@ -20,5 +20,5 @@
     <string name="enter_the_filter_text">Enter the filter text</string>
     <string name="submit">Submit</string>
     <string name="enable_filters">Enable filters</string>
-    <string name="add_filter">Add Filter</string>
+    <string name="add_filter">Add new filter</string>
 </resources>
