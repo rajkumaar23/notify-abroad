@@ -55,12 +55,13 @@ public class SMSReceiver extends BroadcastReceiver {
                         if (!filterListString.isEmpty()) {
                             String messageLowerCase = message.toLowerCase();
                             try {
+                                skipMessage = true;
                                 JSONArray filtersList = new JSONArray(filterListString);
                                 for (int i = 0; i < filtersList.length(); i++) {
                                     String filter = filtersList.getString(i);
                                     if (messageLowerCase.contains(filter)) {
                                         Log.i(TAG, String.format("SMS relaying skipped because a filter ('%s') is present : '%s'", filter, message));
-                                        skipMessage = true;
+                                        skipMessage = false;
                                         break;
                                     }
                                 }
