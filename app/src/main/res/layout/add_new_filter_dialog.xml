@@ -3,21 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="12dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_new_filter"
-        android:textColor="@android:color/black"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/filter_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/colorAccent"
+        android:layout_marginTop="5dp"
         android:hint="@string/enter_the_filter_text"
         android:importantForAutofill="no"
         android:inputType="text" />
@@ -26,8 +24,6 @@
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/submit"
-        android:textColor="@android:color/white" />
+        android:layout_marginTop="10dp"
+        android:text="@string/submit" />
 </LinearLayout>

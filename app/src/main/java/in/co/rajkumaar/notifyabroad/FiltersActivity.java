@@ -2,6 +2,7 @@ package in.co.rajkumaar.notifyabroad;
 
 import static in.co.rajkumaar.notifyabroad.Constants.ARE_FILTERS_ENABLED;
 import static in.co.rajkumaar.notifyabroad.Constants.FILTERS_LIST;
+import static in.co.rajkumaar.notifyabroad.Constants.SMS_CHAR_LIMIT;
 import static in.co.rajkumaar.notifyabroad.Constants.SMS_FILTERS;
 
 import android.app.AlertDialog;
@@ -107,7 +108,9 @@ public class FiltersActivity extends AppCompatActivity {
                 Toast.makeText(FiltersActivity.this, "Filter text cannot be empty", Toast.LENGTH_SHORT).show();
             } else if (filtersList.contains(newFilterText)) {
                 Toast.makeText(FiltersActivity.this, "Filter already exists", Toast.LENGTH_SHORT).show();
-            } else{
+            } else if (newFilterText.length() > SMS_CHAR_LIMIT) {
+                Toast.makeText(FiltersActivity.this, "Filter cannot be more than 160 characters", Toast.LENGTH_SHORT).show();
+            } else {
                 filtersList.add(newFilterText.trim());
                 filtersAdapter.notifyDataSetChanged();
                 dialog.cancel();

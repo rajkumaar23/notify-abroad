@@ -11,4 +11,5 @@ public class Constants {
     public final static String SMS_FILTERS = "sms_filters";
     public final static String ARE_FILTERS_ENABLED = "are_filters_enabled";
     public final static String FILTERS_LIST = "filters_list";
+    public final static int SMS_CHAR_LIMIT = 160;
 }
