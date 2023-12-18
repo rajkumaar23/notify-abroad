@@ -57,8 +57,8 @@ public class FiltersActivity extends AppCompatActivity {
                     filtersList.add(storedFiltersArray.getString(i));
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
                 Log.e("SMS FILTERS", String.format("parsing failed : %s", e));
+                e.printStackTrace();
             }
         }
         filtersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, filtersList);
