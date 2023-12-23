@@ -15,7 +15,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 11.0.7
+          java-version: '17'
           java-package: jdk
           distribution: 'zulu'
       - name: Assemble release APK
@@ -27,7 +27,7 @@ jobs:
           KEYS_PROPERTIES: '${{ secrets.KEYS_PROPERTIES }}'
           KEY_JKS: '${{ secrets.KEY_JKS }}'
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: notify-abroad
           path: app/build/outputs/apk/release/app-release.apk
@@ -38,14 +38,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download APK
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: notify-abroad
-          path: app-release
+      - name: Rename the APK file
+        run: mv app-release.apk notify-abroad.apk
       - uses: marvinpinto/action-automatic-releases@latest
         name: Uploading to GitHub
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
           prerelease: false
           files: |
-            app-release/notify-abroad.apk
+            notify-abroad.apk
