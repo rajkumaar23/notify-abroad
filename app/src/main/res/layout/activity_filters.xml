@@ -40,4 +40,14 @@
         android:layout_marginRight="5dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/emptyFiltersListText"
+        />
 </RelativeLayout>

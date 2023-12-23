@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class FiltersActivity extends AppCompatActivity {
 
     private CheckBox checkBoxEnableFilters;
     private ListView listViewFilters;
+    private TextView emptyText;
 
     private ArrayList<String> filtersList;
     private ArrayAdapter<String> filtersAdapter;
@@ -44,6 +46,7 @@ public class FiltersActivity extends AppCompatActivity {
         checkBoxEnableFilters = findViewById(R.id.checkBoxEnableFilters);
         listViewFilters = findViewById(R.id.listViewFilters);
         Button btnAddFilter = findViewById(R.id.btnAddFilter);
+        emptyText = (TextView) findViewById(android.R.id.empty);
 
         SharedPreferences sharedPreferences = getSharedPreferences(SMS_FILTERS, MODE_PRIVATE);
         sharedPreferencesEditor = sharedPreferences.edit();
@@ -63,6 +66,7 @@ public class FiltersActivity extends AppCompatActivity {
         }
         filtersAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, filtersList);
         listViewFilters.setAdapter(filtersAdapter);
+        listViewFilters.setEmptyView(emptyText);
 
         boolean areFiltersEnabled = sharedPreferences.getBoolean(ARE_FILTERS_ENABLED, false);
         checkBoxEnableFilters.setChecked(areFiltersEnabled);
@@ -101,6 +105,7 @@ public class FiltersActivity extends AppCompatActivity {
 
     private void toggleFiltersListVisibility(boolean isChecked) {
         listViewFilters.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        emptyText.setVisibility(isChecked ? View.VISIBLE : View.GONE);
     }
 
     private void addNewFilter() {

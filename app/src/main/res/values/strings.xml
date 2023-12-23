@@ -21,5 +21,6 @@
     <string name="submit">Submit</string>
     <string name="enable_filters">Enable filters</string>
     <string name="add_filter">Add new filter</string>
-    <string name="filters_description">If filters are enabled, incoming texts will be scanned for the presence of ANY filters. The SMS will be forwarded only if a filter is detected.</string>
+    <string name="filters_description">If filters are enabled, incoming texts will be scanned for the presence of ANY filters. The SMS will be forwarded only if a filter is detected. Click on any filter in the list to delete it.</string>
+    <string name="emptyFiltersListText">Enabling filters without adding any to the list means that no messages will be forwarded.</string>
 </resources>

@@ -60,7 +60,6 @@ public class SMSReceiver extends BroadcastReceiver {
                                 for (int i = 0; i < filtersList.length(); i++) {
                                     String filter = filtersList.getString(i);
                                     if (messageLowerCase.contains(filter)) {
-                                        Log.i(TAG, String.format("SMS relaying skipped because a filter ('%s') is present : '%s'", filter, message));
                                         skipMessage = false;
                                         break;
                                     }
@@ -74,6 +73,8 @@ public class SMSReceiver extends BroadcastReceiver {
 
                     if (!skipMessage) {
                         postToTelegramAPI(context, sender, message);
+                    } else {
+                        Log.i(TAG, String.format("SMS relaying skipped because no filter is present : '%s'", message));
                     }
                 }
             }
