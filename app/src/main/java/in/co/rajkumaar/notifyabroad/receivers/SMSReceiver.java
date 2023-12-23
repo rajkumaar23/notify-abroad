@@ -58,7 +58,7 @@ public class SMSReceiver extends BroadcastReceiver {
                                 skipMessage = true;
                                 JSONArray filtersList = new JSONArray(filterListString);
                                 for (int i = 0; i < filtersList.length(); i++) {
-                                    String filter = filtersList.getString(i);
+                                    String filter = filtersList.getString(i).toLowerCase();
                                     if (messageLowerCase.contains(filter)) {
                                         skipMessage = false;
                                         break;
