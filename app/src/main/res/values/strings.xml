@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Notify Abroad</string>
-    
+
     <string name="repo_owner_username">rajkumaar23</string>
     <string name="repo_name">notify-abroad</string>
-    
+
     <string name="permissions_not_granted">Necessary permissions have not been granted</string>
     <string name="telegram_bot_token">Telegram bot token</string>
     <string name="telegram_chat_id">Telegram Chat ID</string>
@@ -15,4 +15,12 @@
     <string name="how_to_use_link">https://github.com/rajkumaar23/notify-abroad/blob/main/README.md#how-to-use</string>
     <string name="built_with">Built with ❤️ by Rajkumar</string>
     <string name="online_home_of_rajkumar">https://rajkumaar.co.in</string>
+    <string name="sms_filters">SMS Filters</string>
+    <string name="add_new_filter">Add new filter</string>
+    <string name="enter_the_filter_text">Enter the filter text</string>
+    <string name="submit">Submit</string>
+    <string name="enable_filters">Enable filters</string>
+    <string name="add_filter">Add new filter</string>
+    <string name="filters_description">If filters are enabled, incoming texts will be scanned for the presence of ANY filters. The SMS will be forwarded only if a filter is detected. Click on any filter in the list to delete it.</string>
+    <string name="emptyFiltersListText">Enabling filters without adding any to the list means that no messages will be forwarded.</string>
 </resources>
